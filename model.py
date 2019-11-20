@@ -27,6 +27,7 @@ class Activity(db.Model):
     task = db.relationship('Task', backref='activity')
     schedule = db.relationship('Schedule', backref='activity')
     reminder = db.relationship('Reminder', backref='activity')
+    note = db.relationship('Note', backref='activity')
 
 
 class Grade(db.Model):
@@ -75,10 +76,21 @@ class Schedule(db.Model):
     # TODO: PRIMARY KEY(activity_day, activity_time)
 
 
-class Reminder(db.Model)
+class Reminder(db.Model):
     reminder_id = db.Column(db.Integer, nullable=False, primary_key=True)
     name = db.Column(db.String(25), nullable=False,)
     description = db.Column(db.String(25), nullable=False,)
     reminder_date = db.Column(db.DateTime, nullable=False,)
+    activity_id = db.Column(db.Integer, db.ForeignKey(
+        'activity.activity_id'), nullable=False)
+
+
+class Note(db.Model):
+    note_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    name = db.Column(db.String(25), nullable=False)
+    description = db.Column(db.String(30), nullable=False, )
+    note_date = db.Column(db.DateTime, nullable=False)
+    create_date = db.Column(db.DateTime, nullable=False)
+    modified_date = db.Column(db.DateTime, nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey(
         'activity.activity_id'), nullable=False)
