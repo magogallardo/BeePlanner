@@ -22,4 +22,12 @@ class Activity(db.Model):
     priority = db.Column(db.Integer, nullable=False)
     is_subject = db.Column(db.Boolean, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
-        "user.user_id"), nullable=False)
+        'user.user_id'), nullable=False)
+    grade = db.relationship('Grade', backref='activity')
+
+
+class Grade(db.Model): 
+    grade_id = db.Column( db.Integer ,nullable=False, primary_key=True)
+    name = db.Column( db.String(25) ,nullable=False)
+    consideration = db.Column( db.Float ,nullable=False)
+    activity_id = db.Column( db.Integer , db.ForeignKey('activity.activity_id'), nullable=False)
