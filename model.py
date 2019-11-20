@@ -24,7 +24,7 @@ class Activity(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         'user.user_id'), nullable=False)
     grade = db.relationship('Grade', backref='activity')
-    grade = db.relationship('Task', backref='activity')
+    task = db.relationship('Task', backref='activity')
 
 
 class Grade(db.Model):
@@ -45,3 +45,11 @@ class Task(db.Model):
     modified_date = db.Column(db.DateTime, nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey(
         'activity.activity_id'), nullable=False)
+    list_task = db.relationship('ListTask', backref='task')
+
+
+class ListTask(db.Model):
+    task_id = db.Column(db.Integer, db.ForeignKey(
+        'task.id_task'), nullable=False)
+    list_item = db.Column(db.String(20), nullable=False)
+    # PRIMARY KEY(task_id, list_item)
