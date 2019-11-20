@@ -25,6 +25,7 @@ class Activity(db.Model):
         'user.user_id'), nullable=False)
     grade = db.relationship('Grade', backref='activity')
     task = db.relationship('Task', backref='activity')
+    schedule = db.relationship('Schedule', backref='activity')
 
 
 class Grade(db.Model):
@@ -63,3 +64,11 @@ class ListGrade(db.Model):
     grade = db.Column(db.Float, nullable=False, primary_key=True)
     # TODO: PRIMARY KEY(grade_id, name, grade)
 
+
+class Schedule(db.Model):
+    activity_id = db.Column(db.Integer, db.ForeignKey(
+        'activity.activity_id'), nullable=False, primary_key=True)
+    time_init = db.Column(db.DateTime, nullable=False, primary_key=True)
+    time_finish = db.Column(db.DateTime, nullable=False, primary_key=True)
+    day = db.Column(db.String(10), nullable=False, primary_key=True)
+    # TODO: PRIMARY KEY(activity_day, activity_time)
