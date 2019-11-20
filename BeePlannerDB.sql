@@ -53,14 +53,14 @@ CREATE TABLE Task
 );
 
 
-CREATE TABLE List_Task
+CREATE TABLE ListTask
 (
 	task_id INT NOT NULL REFERENCES Task(task_id),
 	list_item NVARCHAR(20) NOT NULL,
 	PRIMARY KEY (task_id, list_item)
 );
 
-CREATE TABLE List_Grade
+CREATE TABLE ListGrade
 (
 	grade_id INT NOT NULL REFERENCES Grade(grade_id),
 	name NVARCHAR(25) NOT NULL,
