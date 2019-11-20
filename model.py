@@ -24,10 +24,24 @@ class Activity(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         'user.user_id'), nullable=False)
     grade = db.relationship('Grade', backref='activity')
+    grade = db.relationship('Task', backref='activity')
 
 
-class Grade(db.Model): 
-    grade_id = db.Column( db.Integer ,nullable=False, primary_key=True)
-    name = db.Column( db.String(25) ,nullable=False)
-    consideration = db.Column( db.Float ,nullable=False)
-    activity_id = db.Column( db.Integer , db.ForeignKey('activity.activity_id'), nullable=False)
+class Grade(db.Model):
+    grade_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    name = db.Column(db.String(25), nullable=False)
+    consideration = db.Column(db.Float, nullable=False)
+    activity_id = db.Column(db.Integer, db.ForeignKey(
+        'activity.activity_id'), nullable=False)
+
+
+class Task(db.Model):
+    task_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    name = db.Column(db.String(20), nullable=False,)
+    description = db.Column(db.String(30), nullable=False)
+    progress = db.Column(db.Integer, nullable=False)
+    due_date = db.Column(db.DateTime, nullable=False)
+    create_date = db.Column(db.DateTime, nullable=False)
+    modified_date = db.Column(db.DateTime, nullable=False)
+    activity_id = db.Column(db.Integer, db.ForeignKey(
+        'activity.activity_id'), nullable=False)
