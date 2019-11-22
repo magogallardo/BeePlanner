@@ -10,11 +10,10 @@ CREATE TABLE User
 	email NVARCHAR(30) NOT NULL,
 	phone NVARCHAR(10) NOT NULL,
 	password NVARCHAR(25) NOT NULL,
+	create_date DATETIME NOT NULL,
+	modified_date DATETIME NOT NULL,
 	PRIMARY KEY (user_id)
-
 );
-
-
 
 CREATE TABLE Activity
 (
@@ -23,20 +22,19 @@ CREATE TABLE Activity
 	priority INT NOT NULL,
 	is_subject BOOLEAN NOT NULL,
 	user_id INT NOT NULL REFERENCES User(user_id),
+    start_time TIME NOT NULL,
+    finish_time TIME NOT NULL,
+	monday BOOLEAN NOT NULL,
+	tuesday BOOLEAN NOT NULL,
+	wednesday BOOLEAN NOT NULL,
+	thursday BOOLEAN NOT NULL,
+	friday BOOLEAN NOT NULL,
+	saturday BOOLEAN NOT NULL,
+	sunday BOOLEAN NOT NULL,	
+	create_date DATETIME NOT NULL,
+	modified_date DATETIME NOT NULL,
 	PRIMARY KEY (activity_id)
-
 );
-
-CREATE TABLE Grade 
-(
-	grade_id INT NOT NULL AUTO_INCREMENT,
-	name NVARCHAR(25) NOT NULL,
-	consideration DECIMAL(2,2) NOT NULL,
-	activity_id INT NOT NULL REFERENCES Activity(activity_id),
-	PRIMARY KEY (grade_id)
-
-);
-
 
 CREATE TABLE Task
 (
@@ -44,39 +42,21 @@ CREATE TABLE Task
 	name NVARCHAR(20) NOT NULL,
 	description NVARCHAR(30) NOT NULL,
 	progress INT NOT NULL,	
-	due_date DATE NOT NULL,
-	create_date DATE NOT NULL,
-	modified_date DATE NOT NULL,
+	due_date DATETIME NOT NULL,
+	create_date DATETIME NOT NULL,
+	modified_date DATETIME NOT NULL,
 	activity_id INT NOT NULL REFERENCES Activity(activity_id),
 	PRIMARY KEY (task_id)
-
 );
-
 
 CREATE TABLE ListTask
 (
 	task_id INT NOT NULL REFERENCES Task(task_id),
-	list_item NVARCHAR(20) NOT NULL,
-	PRIMARY KEY (task_id, list_item)
-);
-
-CREATE TABLE ListGrade
-(
-	grade_id INT NOT NULL REFERENCES Grade(grade_id),
-	name NVARCHAR(25) NOT NULL,
-	grade DECIMAL(2,2) NOT NULL,
-	PRIMARY KEY(grade_id, name, grade)
-
-);
-
-CREATE TABLE Schedule
-(
-	activity_id INT NOT NULL REFERENCES Activity(activity_id),
-	time_init TIME NOT NULL,
-    time_finish TIME NOT NULL,
-	day NVARCHAR(10) NOT NULL,
-	PRIMARY KEY(activity_day, activity_time)
-
+    activity_id INT NOT NULL REFERENCES Activity(activity_id),
+	list_item NVARCHAR(20) NOT NULL,	
+	create_date DATETIME NOT NULL,
+	modified_date DATETIME NOT NULL,
+	PRIMARY KEY (task_id, activity_id)
 );
 
 CREATE TABLE Reminder
@@ -86,19 +66,19 @@ CREATE TABLE Reminder
 	description NVARCHAR(25) NOT NULL,
 	reminder_date DATETIME NOT NULL,
 	activity_id INT NOT NULL REFERENCES Activity(activity_id),
+	is_all_day BOOLEAN NOT NULL,	
+	create_date DATETIME NOT NULL,
+	modified_date DATETIME NOT NULL,
 	PRIMARY KEY (reminder_id)
-
 );
 
 CREATE TABLE Note
 (
 	note_id INT NOT NULL AUTO_INCREMENT,
 	name NVARCHAR(25) NOT NULL,
-	description NVARCHAR(30) NOT NULL,	
-	note_date DATE NOT NULL,
+	description NVARCHAR(30) NOT NULL,
 	create_date DATETIME NOT NULL,
 	modified_date DATETIME NOT NULL,
 	activity_id INT NOT NULL REFERENCES Activity(activity_id),
 	PRIMARY KEY(note_id)
-
 );
