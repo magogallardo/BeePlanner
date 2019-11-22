@@ -45,7 +45,7 @@ CREATE TABLE Task
 	PRIMARY KEY (task_id)
 );
 
-CREATE TABLE List_Task
+CREATE TABLE ListTask
 (
 	task_id INT NOT NULL REFERENCES Task(task_id),
     activity_id INT NOT NULL REFERENCES Activity(activity_id),
