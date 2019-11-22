@@ -1,4 +1,9 @@
 from flask import Flask
+<<<<<<< HEAD
+
+global app
+app = FLask(__name__)
+=======
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
@@ -23,3 +28,4 @@ app.config['SECRET_KEY'] = ('110c8ae51a4b5af97be6534caef90e4bb9bdcb'
 db = SQLAlchemy(app)
 # Login manager object for autentication
 login_manager = LoginManager(app)
+>>>>>>> upstream/master
