@@ -52,7 +52,7 @@ CREATE TABLE Task
 CREATE TABLE ListTask
 (
 	task_id INT NOT NULL REFERENCES Task(task_id),
-    activity_id INT NOT NULL REFERENCES Activity(activity_id),
+    activity_id INT NOT NULL REFERENCES Task(activity_id),
 	list_item NVARCHAR(20) NOT NULL,	
 	create_date DATETIME NOT NULL,
 	modified_date DATETIME NOT NULL,
