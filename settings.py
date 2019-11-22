@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
 
 __all__ = ['app', 'login_manager']  # app it will be shared among all files
 
@@ -19,5 +20,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Secret key
 app.config['SECRET_KEY'] = ('110c8ae51a4b5af97be6534caef90e4bb9bdcb'
                             '3380af008f90b23a5d1616bf319bc298105da20fe')
+db = SQLAlchemy(app)
 # Login manager object for autentication
 login_manager = LoginManager(app)
