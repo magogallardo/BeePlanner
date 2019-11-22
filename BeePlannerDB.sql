@@ -67,8 +67,7 @@ CREATE TABLE Note
 (
 	note_id INT NOT NULL AUTO_INCREMENT,
 	name NVARCHAR(25) NOT NULL,
-	description NVARCHAR(30) NOT NULL,	
-	note_date DATE NOT NULL,
+	description NVARCHAR(30) NOT NULL,
 	create_date DATETIME NOT NULL,
 	modified_date DATETIME NOT NULL,
 	activity_id INT NOT NULL REFERENCES Activity(activity_id),
