@@ -3,6 +3,8 @@ from settings import db
 
 class User(db.Model):
     """docstring for User"""
+
+    __tablename__ = "User"
     user_id = db.Column(db.Integer, nullable=False, primary_key=True)
     last_name = db.Column(db.String(25), nullable=False)
     name = db.Column(db.String(20), nullable=False)
@@ -11,17 +13,20 @@ class User(db.Model):
     password = db.Column(db.String(25), nullable=False)
     create_date = db.Column(db.DateTime, nullable=False)
     modified_date = db.Column(db.DateTime, nullable=False)
-    # db.relationship must be in the parent table
-    activity = db.relationship('Activity', backref='user')
+    # db.relationship must      be in the parent table
+    activity = db.relationship('Activity', backref='User')
 
 
 class Activity(db.Model):
+    """docstring for Activity"""
+
+    __tablename__ = "Activity"
     activity_id = db.Column(db.Integer, nullable=False, primary_key=True)
     name = db.Column(db.String(25), nullable=False)
     priority = db.Column(db.Integer, nullable=False)
     is_subject = db.Column(db.Boolean, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
-        'user.user_id'), nullable=False)
+        'User.user_id'), nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
     finish_time = db.Column(db.DateTime, nullable=False)
     monday = db.Column(db.Boolean, nullable=False)
@@ -34,10 +39,13 @@ class Activity(db.Model):
     create_date = db.Column(db.DateTime, nullable=False)
     modified_date = db.Column(db.DateTime, nullable=False)
     # db.relationship must be in the parent table
-    task = db.relationship('task', backref='activity')
+    task = db.relationship('Task', backref='Activity')
 
 
 class Task(db.Model):
+    """docstring for Task"""
+
+    __tablename__ = "Task"
     task_id = db.Column(db.Integer, nullable=False, primary_key=True)
     name = db.Column(db.String(20), nullable=False,)
     description = db.Column(db.String(30), nullable=False)
@@ -46,10 +54,13 @@ class Task(db.Model):
     create_date = db.Column(db.DateTime, nullable=False)
     modified_date = db.Column(db.DateTime, nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey(
-        'activity.activity_id'), nullable=False)
+        'Activity.activity_id'), nullable=False)
 
 
 class ListTask(db.Model):
+    """docstring for ListTask"""
+
+    __tablename__ = "ListTask"
     task_id = db.Column(db.Integer, db.ForeignKey(
         'task.task_id'), nullable=False, primary_key=True)
     activity_id = db.Column(db.Integer, db.ForeignKey(
@@ -61,6 +72,9 @@ class ListTask(db.Model):
 
 
 class Reminder(db.Model):
+    """docstring for Reminder"""
+
+    __tablename__ = "Reminder"
     reminder_id = db.Column(db.Integer, nullable=False, primary_key=True)
     name = db.Column(db.String(25), nullable=False,)
     description = db.Column(db.String(25), nullable=False,)
@@ -69,14 +83,17 @@ class Reminder(db.Model):
     create_date = db.Column(db.DateTime, nullable=False)
     modified_date = db.Column(db.DateTime, nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey(
-        'activity.activity_id'), nullable=False)
+        'Activity.activity_id'), nullable=False)
 
 
 class Note(db.Model):
+    """docstring for Note"""
+
+    __tablename__ = "Note"
     note_id = db.Column(db.Integer, nullable=False, primary_key=True)
     name = db.Column(db.String(25), nullable=False)
     description = db.Column(db.String(30), nullable=False, )
     create_date = db.Column(db.DateTime, nullable=False)
     modified_date = db.Column(db.DateTime, nullable=False)
-    activity_id = db.Column(db.Integer, db.ForeignKey(
-        'activity.activity_id'), nullable=False)
+    activity_id = db.Column(db.Integer, db.sForeignKey(
+        'Activity.activity_id'), nullable=False)
