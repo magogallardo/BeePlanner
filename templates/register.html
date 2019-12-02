@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="shortcut icon" type="image/png" href="icon.png"/>
+    <link  rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.materialdesignicons.com/1.1.34/">
+    <link rel="stylesheet" type="text/css" href="form-style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="form.js"></script> -->
+</head>
+<body>
+<!-- Navigator -->
+  <div class="nav-fixed">
+  <nav class="nav">
+      <div class="nav-wrapper container">  
+        <a href="index.html" class="brand-logo left">BeePlanner</a>
+        <ul class="right">
+          <li>
+            <a href="" >
+              Home
+              <i class="material-icons left">home</i>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              Login
+            <i class="material-icons left">people</i>
+          </a>
+        </li>
+          <li>
+            <a href="" >
+              Sign up
+            <i class="material-icons left">account_circle</i>
+            </a>
+          </li>
+        </ul>
+     </div>
+  </nav>
+  </div>
+
+<!-- Content -->
+  <div class="row form-page">
+      <div class="col s12 z-depth-6 card-panel">
+
+        <form class="login-form">
+          
+          <div class="row">
+            <div class=" input-field col s12">
+              <i class="material-icons prefix">person</i>
+              <input class="validate" id="name" name="name" type="text"  minlength="5">
+              <label class="" for="name" data-error="wrong" data-success="right">name</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class=" input-field col s12">
+              <i class="material-icons prefix">person_outline</i>
+              <input class="validate" id="last-name" name="last-name" type="text"  minlength="5">
+              <label class="" for="last-name" data-error="wrong" data-success="right">last-name</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class=" input-field col s12">
+              <i class="material-icons prefix">phone</i>
+              <input class="validate" id="phone" name="phone" type="tel" minlength="10">
+              <label class="" for="phone" data-error="wrong" data-success="right">phone</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class=" input-field col s12">
+              <i class="material-icons prefix">mail</i>
+              <input class="validate" id="email" name="email" type="email" minlength="5">
+              <label class="" for="email" data-error="wrong" data-success="right">email</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class=" input-field col s12">
+              <i class="material-icons prefix">lock</i>
+              <input class="validate" id="password" name="password" type="password" minlength="8">
+              <label class="" for="password" data-error="wrong" data-success="right">password</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class=" input-field col s12">
+              <i class="material-icons prefix">lock_outline</i>
+              <input class="validate" id="password-2" name="password-2" type="password" minlength="8">
+              <label class="" for="password-2" data-error="wrong" data-success="right">repeat password</label>
+            </div>
+          </div>
+
+
+          <div class="row" align="center">
+            <input type="button" class="button" value="REGISTER">        
+          </div>
+
+          <div class="row">
+            <div class="input-field col s8 m8 l12">
+              <p class="margin medium-small font-grey">Do you already registered? <a href="index.html">Login Now!</a></p>
+            </div>
+          </div>
+
+        </form>
+
+
+      </div>
+    </div>
+</body>
+</html>
