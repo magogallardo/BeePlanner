@@ -1,31 +1,23 @@
 from flask import Flask
-<<<<<<< HEAD
-
-global app
-app = FLask(__name__)
-=======
-from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from os.path import abspath
+from os import getcwd
 
-__all__ = ['app', 'login_manager']  # app it will be shared among all files
-
-db_username = 'hbaena'
-db_password = 'BeePlanner123|'
-db_name = 'Cinema'
-
-app = Flask(__name__)  # This is the flask object that will be executed and it
-
-# MySql connectr
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{}:{}@localhost/{}'.format(
-    db_username, db_password, db_name)
-
-# Necessary to ignore a warning
+db_name = 'Cinema.db'
+app = Flask(__name__)
+uri = f'sqlite:///{abspath(getcwd())}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Secret key
-app.config['SECRET_KEY'] = ('110c8ae51a4b5af97be6534caef90e4bb9bdcb'
-                            '3380af008f90b23a5d1616bf319bc298105da20fe')
+app.secret_key = "gydasjhfuisuqtyy234897dshfbhsdfg83wt7"
+# connection = f'mysql+pymysql://{user}:{password}@{host}:{port}/{db_name}'
+# db = create_engine()
 db = SQLAlchemy(app)
-# Login manager object for autentication
-login_manager = LoginManager(app)
->>>>>>> upstream/master
+
+# db = create_engine(connection)
+# Base = db.Model
+# Column = db.Column
+# Integer = db.Integer
+# String = db.String
+# DateTime = db.DateTime
+# Float = db.Float
+# ForeignKey = db.ForeignKey
