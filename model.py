@@ -8,6 +8,7 @@ class InfoCodes(object):
     EMAIL_NOT_FOUND = 3
     WRONG_PASSWORD = 4
     SUCCESS = 5
+    USER_ALREADY_EXIST = 1
 
 
 class Model:
@@ -89,7 +90,7 @@ class Model:
         self.__session.delete(user)
 
     def verify_user(self, token, password):
-        user = self.session.query(User).filter(
+        user = self.__session.query(User).filter(
             (User.username == token) | (User.email == token)).first()
         if not user:
             return InfoCodes.USER_NOT_FOUND
@@ -111,6 +112,10 @@ class User(db.Model):
     phone = db.Column(db.String(12), nullable=False)
     # db.relationship must      be in the parent table
     activity = db.relationship('Activity', backref='User')
+
+    def __repr__(self):
+        return (f'{self.username},{self.password},'
+                f'{self.email},{self.name},{self.lastname}')
 
 
 class Activity(db.Model):
@@ -147,6 +152,7 @@ class Schedule(db.Model):
     """docstring for Schedule"""
 
     __tablename__ = "Schedule"
+    schedule_id = db.Column(db.Integer, nullable=False, primary_key=True)
     monday = db.Column(db.String(25), nullable=False)
     tuesday = db.Column(db.String(25), nullable=False)
     wednesday = db.Column(db.String(25), nullable=False)
