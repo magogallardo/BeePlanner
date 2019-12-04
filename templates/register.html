@@ -1,49 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-    <link rel="shortcut icon" type="image/png" href="icon.png"/>
-    <link  rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.materialdesignicons.com/1.1.34/">
-    <link rel="stylesheet" type="text/css" href="form-style.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-
-    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script type="text/javascript" src="form.js"></script> -->
-</head>
-<body>
-<!-- Navigator -->
-  <div class="nav-fixed">
-  <nav class="nav">
-      <div class="nav-wrapper container">  
-        <a href="index.html" class="brand-logo left">BeePlanner</a>
-        <ul class="right">
-          <li>
-            <a href="" >
-              Home
-              <i class="material-icons left">home</i>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              Login
-            <i class="material-icons left">people</i>
-          </a>
-        </li>
-          <li>
-            <a href="" >
-              Sign up
-            <i class="material-icons left">account_circle</i>
-            </a>
-          </li>
-        </ul>
-     </div>
-  </nav>
-  </div>
-
-<!-- Content -->
+{% extends "base-materialize.html" %}
+{% block content %}
+{% include "nav.html" %}
   <div class="row form-page">
       <div class="col s12 z-depth-6 card-panel">
 
@@ -112,6 +69,5 @@
 
 
       </div>
-    </div>
-</body>
-</html>
+  </div>
+{% endblock %}
