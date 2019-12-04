@@ -3,7 +3,7 @@
 {% include "nav.html" %}
 <div class="row form-page">
     <div class="col s12 z-depth-6 card-panel">
-      <form class="login-form" method="GET">
+      <form class="login-form" method="POST">
         <div class="row">
         </div>
         <div class="row">
@@ -27,11 +27,12 @@
           </div>
         </div>
         <div class="row" align="center">
-          <input type="button" class="button" value="REGISTER">        
+          <!-- <button type="button" class="button" value="LOGIN">         -->
+          <button class="button">LOGIN</button>
         </div>
         <div class="row">
           <div class="input-field col s6 m6 l6" >
-            <p class="margin medium-small "><a href="register.html">Register Now!</a></p>
+            <p class="margin medium-small "><a href="{{ url_for('register') }}">Register Now!</a></p>
           </div>
           <div class="input-field col s6 m6 l6">
               <p class="margin right-align medium-small"><a href="#">Forgot password?</a></p>

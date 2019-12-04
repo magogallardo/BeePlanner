@@ -4,12 +4,20 @@
   <div class="row form-page">
       <div class="col s12 z-depth-6 card-panel">
 
-        <form class="login-form">
+        <form class="login-form" method="POST">
           
           <div class="row">
             <div class=" input-field col s12">
+              <i class="material-icons prefix">face</i>
+              <input class="validate" id="username" name="username" type="text"  minlength="5">
+              <label class="" for="username" data-error="wrong" data-success="right">username</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class=" input-field col s12">
               <i class="material-icons prefix">person</i>
-              <input class="validate" id="name" name="name" type="text"  minlength="5">
+              <input class="validate" id="name" name="name" type="text"  minlength="4">
               <label class="" for="name" data-error="wrong" data-success="right">name</label>
             </div>
           </div>
@@ -17,8 +25,8 @@
           <div class="row">
             <div class=" input-field col s12">
               <i class="material-icons prefix">person_outline</i>
-              <input class="validate" id="last-name" name="last-name" type="text"  minlength="5">
-              <label class="" for="last-name" data-error="wrong" data-success="right">last-name</label>
+              <input class="validate" id="last-name" name="lastname" type="text"  minlength="5">
+              <label class="" for="last-name" data-error="wrong" data-success="right">lastname</label>
             </div>
           </div>
           
@@ -50,18 +58,18 @@
             <div class=" input-field col s12">
               <i class="material-icons prefix">lock_outline</i>
               <input class="validate" id="password-2" name="password-2" type="password" minlength="8">
-              <label class="" for="password-2" data-error="wrong" data-success="right">repeat password</label>
+              <label class="" for="password-2" data-error="Passwords not match" data-success="Password matchs">repeat password</label>
             </div>
           </div>
 
 
           <div class="row" align="center">
-            <input type="button" class="button" value="REGISTER">        
+            <button class="button">REGISTER</button>
           </div>
 
           <div class="row">
             <div class="input-field col s8 m8 l12">
-              <p class="margin medium-small font-grey">Do you already registered? <a href="index.html">Login Now!</a></p>
+              <p class="margin medium-small font-grey">Do you already registered? <a href="{{ url_for('login') }}">Login Now!</a></p>
             </div>
           </div>
 
@@ -70,4 +78,22 @@
 
       </div>
   </div>
+
+  <script type="text/javascript">
+    $("#password").on("focusout", function (e) {
+    if ($(this).val() != $("#password-2").val()) {
+        $("#password-2").removeClass("valid").addClass("invalid");
+    } else {
+        $("#password-2").removeClass("invalid").addClass("valid");
+    }
+});
+
+$("#password-2").on("keyup", function (e) {
+    if ($("#password").val() != $(this).val()) {
+        $(this).removeClass("valid").addClass("invalid");
+    } else {
+        $(this).removeClass("invalid").addClass("valid");
+    }
+});
+  </script>
 {% endblock %}
