@@ -24,6 +24,11 @@ def get_random_color():
     return choice(modals_colors)
 
 
+def render_this_page(url, title):
+    kwargs = logged_args()
+    return render_template(url, title=title, **kwargs)
+
+
 def logged_args():
     if 'username' not in session:
         status_log = 'Login'
@@ -55,36 +60,53 @@ def schedule():
 @app.route('/home')
 # @logged_args
 def home():
-    # session['username'] = ''
-    kwargs = logged_args()
-    redirect_page = 'schedule.html' if 'username' in session else 'index.html'
-    return render_template(redirect_page, title='HOME', **kwargs)
+    url = 'schedule.html' if 'username' in session else 'index.html'
+    return render_this_page(url, 'HOME')
 
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    def render_this_page():
-        kwargs = logged_args()
-        return render_template('login.html', title='LOGIN', **kwargs)
-    if request.form:
-        username = request.form['username']
-        password = request.form['password']
-        response = controller.login(username, password)
-        if response == InfoCodes.USER_NOT_FOUND:
-            return render_this_page()
-        if response == InfoCodes.WRONG_PASSWORD:
-            return render_this_page()
-        if response == InfoCodes.SUCCESS:
-            session['username'] = username
-            return redirect(url_for('home'))
+    if request.method == 'GET':
+        return render_this_page('login.html', 'LOGIN')
+    else:
+        if request.form:
+            email = request.form['email']
+            password = request.form['password']
+            response = controller.login(email, password)
+            if response == InfoCodes.USER_NOT_FOUND:
+                return render_this_page('login.html', 'LOGIN')
+            if response == InfoCodes.WRONG_PASSWORD:
+                return render_this_page('login.html', 'LOGIN')
+            if response == InfoCodes.SUCCESS:
+                session['username'] = controller.get_username(email)
+                return redirect(url_for('home'))
 
-    return render_this_page()
+    return render_this_page('login.html', 'LOGIN')
 
 
-@app.route('/register')
+@app.route('/register', methods=['POST', 'GET'])
 def register():
-    kwargs = logged_args()
-    return render_template('register.html', title='REGISTER', **kwargs)
+    if 'username' in session or request.method == 'GET':
+        return render_this_page('register.html', 'REGISTER')
+    elif request.method == 'POST':
+        username = request.form['username']
+        name = request.form['name']
+        lastname = request.form['lastname']
+        phone = request.form['phone']
+        email = request.form['email']
+        password = request.form['password']
+        if not all([username, name, lastname, phone, email, password]):
+            return render_this_page('register.html', 'REGISTER')
+        else:
+            response = controller.add_user(username, email, password,
+                                           name, lastname, phone)
+            if response == InfoCodes.USER_ALREADY_EXIST:
+                return render_this_page('register.html', 'REGISTER')
+            else:
+                controller.save()
+                return redirect(url_for('home'))
+
+    return render_this_page('register.html', 'REGISTER')
 
 
 @app.route('/logout')
