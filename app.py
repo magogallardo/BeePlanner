@@ -55,6 +55,11 @@ def schedule():
     return render_template('schedule.html')
 
 
+@app.route('/test')
+def test():
+    return render_template('home.html')
+
+
 @app.route('/')
 @app.route('/index')
 @app.route('/home')
