@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/bee.png') }}"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-schedule.css') }}">
-  <title>schedule</title>
-</head>
-<body>
-{% include "nav.html" %}
-
+<div class="row s12" align="center">
+  <h2>Schedule</h2>
+</div>
 <div class="row calendar">
-  
 <div class="card-panel z-depth-3">
     <div class="row s12">
-        <div class="col s1"><h4 class=""></h3></div>
+        <div class="col s2"><h4 class=""></h3></div>
         <div class="col s2"><h4 class="">Mon</h3></div>
         <div class="col s2"><h4 class="">Tue</h3></div>
         <div class="col s2"><h4 class="">Wed</h3></div>
@@ -26,7 +12,7 @@
         <div class="col s2"><h4 class="">Fri</h3></div>
     </div>
     <div class="row s1">
-      <div class="col s1">
+      <div class="col s2">
         <div class="hours" align="right">04:00</div>
         <div class="hours" align="right">05:00</div>
         <div class="hours" align="right">06:00</div>
@@ -53,50 +39,10 @@
       <div class="row s2" name='monday'>
         <div class="col s2">
           <div class="calendar__day">
-            <a class="modal-trigger teal lighten-2" href="#pop-up">
-            Modal
-            </a>
-            <div id="pop-up" class="modal">
-              <div class="modal-content">
-              <h1>Title</h1>
-               <div class="divider"></div>
-              <p class="flow-text bols">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum veniam quisquam perferendis enim accusantium ipsam placeat quod modi consequuntur accusamus reiciendis quos vitae, earum, ratione a cupiditate illum? Iure, neque!
-              </p>                
-              </div>
-              <div class="modal-header">
-                      <a href="#!" class="modal-close waves-effect waves-green btn-flat"><h4>Close</h4></a>
-              </div>
-            </div>        
-            <a class="modal-trigger teal lighten-2" href="#pop-up-2">
-            Modal
-            </a>
-            <div id="pop-up-2" class="modal">
-              <div class="modal-content">
-              <h1>Title</h1>
-              <p class="flow-text bols">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum veniam quisquam perferendis enim accusantium ipsam placeat quod modi consequuntur accusamus reiciendis quos vitae, earum, ratione a cupiditate illum? Iure, neque!
-              </p>                
-              </div>
-              <div class="modal-header">
-                      <a href="#!" class="modal-close waves-effect waves-green btn-flat"><h4>Close</h4></a>
-              </div>
-            </div>
-
-            <a class="modal-trigger teal lighten-2" href="#pop-up-3">
-            Modal
-            </a>
-            <div id="pop-up-3" class="modal">
-              <div class="modal-content">
-              <h1>Title</h1>
-              <p class="flow-text bols">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum veniam quisquam perferendis enim accusantium ipsam placeat quod modi consequuntur accusamus reiciendis quos vitae, earum, ratione a cupiditate illum? Iure, neque!
-              </p>                
-              </div>
-              <div class="modal-header">
-                      <a href="#!" class="modal-close waves-effect waves-green btn-flat"><h4>Close</h4></a>
-              </div>
-            </div>        
+            {% with  color='lime lighten-1', modal_id='modal-1', trigger='trigger',
+                            modal_title='title', content='Hello world'%}
+                {% include 'pop-up.html'%}
+            {% endwith%}
 
           </div>
           <div class="calendar__day">Hello</div>
@@ -223,7 +169,3 @@
 </div>
 
 </div>
-{% include "modals-init.html" %}
-
-</body>
-</html>
