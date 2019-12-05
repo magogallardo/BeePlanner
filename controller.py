@@ -33,3 +33,58 @@ class Controller:
 
     def get_all_users(self):
         return self.model.read_users()
+
+    def add_activity(self, username, description, priority, location, title):
+        activity = self.model.read_activity(title)
+        if activity:
+            return InfoCodes.ACTIVITY_ALREADY_EXIST
+        self.model.create_acitivity(title, description,
+                                    priority, location, username)
+        return self.model.read_activity(title).activity_id
+
+    def add_schedule(self, monday, tuesday, wednesday, thursday,
+                     friday, activity_id):
+        self.model.create_schedule(monday, tuesday, wednesday,
+                                   thursday, friday, activity_id)
+
+    def get_activities(self, username):
+        activities = self.model.read_activities(username)
+        if activities:
+            return activities
+        else:
+            return InfoCodes.ERROR
+
+    def remove_user(self, username):
+        response = self.model.read_user(username)
+        if response == InfoCodes.USERNAME_NOT_FOUND:
+            return response
+        self.model.delete_user(response)
+        return InfoCodes.SUCCESS
+
+    def remove_activity(self, title):
+        response = self.model.read_activity(title)
+        if response == InfoCodes.ERROR:
+            return response
+        self.model.delete_activity(response)
+        return InfoCodes.SUCCESS
+
+    def add_note(self, content, priority, due_date,
+                 creationt_date, username,
+                 activity_id,):
+        self.model.create_note(content, priority, due_date,
+                               creationt_date, username, activity_id)
+
+    def get_notes(self, username=None, title=None):
+        if username:
+            return self.model.read_notes(username=username)
+        elif title:
+            activity_id = self.model.read_activity(title).activity_id
+            return self.model.read_notes(activity_id=activity_id)
+
+    def remove_notes(self, username, title, content):
+        note = self.model.read_note(username, title, content)
+        if note:
+            self.model.delete_note(note)
+            return InfoCodes.SUCCESS
+        else:
+            return InfoCodes.ERROR

@@ -1,14 +1,37 @@
 from settings import db
 
+MODAL_COLORS = (
+    'red lighten-3',
+    'amber lighten-3',
+    'deep-orange accent-1',
+    'blue-grey lighten-1',
+    'amber accent-3',
+    'lime lighten-2',
+    'teal accent-3',
+    'indigo lighten-3',
+    'purple accent-1',
+    'red lighten-2',
+    'light-green lighten-2'
+)
 
-class InfoCodes(object):
+
+class Priorities:
+    NONE = 0
+    HIGH = 1
+    MEDIUM = 2
+    LOW = 3
+
+
+class InfoCodes:
     """docstring for InfoCodes"""
-    USER_NOT_FOUND = 1
-    USERNAME_NOT_FOUND = 2
-    EMAIL_NOT_FOUND = 3
-    WRONG_PASSWORD = 4
-    SUCCESS = 5
-    USER_ALREADY_EXIST = 1
+    ERROR = 0
+    USER_NOT_FOUND = -1
+    USERNAME_NOT_FOUND = -2
+    EMAIL_NOT_FOUND = -3
+    WRONG_PASSWORD = -4
+    SUCCESS = -5
+    USER_ALREADY_EXIST = -6
+    ACTIVITY_ALREADY_EXIST = -7
 
 
 class Model:
@@ -50,15 +73,15 @@ class Model:
             if response:
                 return response
             else:
-                return False
+                return InfoCodes.ERROR
         elif email:
             response = self.__session.query(User).filter(
                 User.email == email).first()
             if response:
                 return response
             else:
-                return False
-        return False
+                return InfoCodes.ERROR
+        return InfoCodes.ERROR
 
     def read_users(self):
         return self.__session.query(User).all()
@@ -99,6 +122,65 @@ class Model:
         else:
             return InfoCodes.SUCCESS
 
+    # ------------------------- #
+    #       ACTIVITY METHODS    #
+    # ------------------------- #
+    def create_schedule(self, monday, tuesday, wednesday, thursday,
+                        friday, activity_id):
+        self.__session.add(Schedule(monday=monday, tuesday=tuesday,
+                                    wednesday=wednesday, thursday=thursday,
+                                    friday=friday, activity_id=activity_id))
+
+    def read_schedule(self, activity_id):
+        return self.__session.query(Schedule).join(Activity).filter(
+            Activity.activity_id == activity_id).all()
+
+    def create_acitivity(self,  title, description,
+                         priority, location, username, ):
+        self.__session.add(Activity(description=description,
+                                    title=title, priority=priority,
+                                    location=location, username=username,))
+
+    def read_activity(self, title):
+        response = self.__session.query(Activity).filter(
+            Activity.title == title).first()
+        if response:
+            return response
+        else:
+            return InfoCodes.ERROR
+
+    def read_activities(self, username=None):
+        return self.__session.query(Activity).join(
+            User).filter(User.username == username).all()
+
+    def delete_activity(self, activity):
+        self.__session.delete(activity)
+
+    def create_note(self, content, priority, due_date,
+                    creationt_date, username,
+                    activity_id,):
+        self.__session.add(Note(content=content, priority=priority,
+                                due_date=due_date,
+                                creationt_date=creationt_date,
+                                username=username,
+                                activity_id=activity_id,))
+
+    def read_notes(self, username=None, activity_id=None):
+        if username:
+            return self.__session.query(Note).join(
+                User).filter(User.username == username)
+        elif activity_id:
+            return self.__session.query(Note).join(
+                Activity).filter(Activity.activity_id == activity_id)
+
+    def read_note(self, username, activity_id, content):
+        self.__session.query(Note).filter(
+            Note.username == username & Note.activity_id == activity_id &
+            Note.content == content).first()
+
+    def delete_note(self, note):
+        self.__session.delete(note)
+
 
 class User(db.Model):
     """docstring for User"""
@@ -111,7 +193,8 @@ class User(db.Model):
     lastname = db.Column(db.String(30), nullable=False)
     phone = db.Column(db.String(12), nullable=False)
     # db.relationship must      be in the parent table
-    activity = db.relationship('Activity', backref='User')
+    activity = db.relationship(
+        'Activity', backref='User', cascade="all, delete-orphan")
 
     def __repr__(self):
         return (f'{self.username},{self.password},'
@@ -130,7 +213,13 @@ class Activity(db.Model):
     username = db.Column(db.Integer, db.ForeignKey(
         'User.username'), nullable=False)
     # db.relationship must      be in the parent table
-    note = db.relationship('Note', backref='Activity')
+    note = db.relationship('Note', backref='Activity',
+                           cascade="all, delete-orphan")
+    schedule = db.relationship(
+        'Schedule', backref='Activity', cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return (f'{self.title}, {self.location}, {self.username}')
 
 
 class Note(db.Model):
@@ -153,10 +242,10 @@ class Schedule(db.Model):
 
     __tablename__ = "Schedule"
     schedule_id = db.Column(db.Integer, nullable=False, primary_key=True)
-    monday = db.Column(db.String(25), nullable=False)
-    tuesday = db.Column(db.String(25), nullable=False)
-    wednesday = db.Column(db.String(25), nullable=False)
-    thursday = db.Column(db.String(25), nullable=False)
-    friday = db.Column(db.String(25), nullable=False)
+    monday = db.Column(db.String(25), nullable=True)
+    tuesday = db.Column(db.String(25), nullable=True)
+    wednesday = db.Column(db.String(25), nullable=True)
+    thursday = db.Column(db.String(25), nullable=True)
+    friday = db.Column(db.String(25), nullable=True)
     activity_id = db.Column(db.Integer, db.ForeignKey(
         'Activity.activity_id'), nullable=False)
