@@ -25,6 +25,11 @@ nav {
     width: 90%;
     /*padding: 100px;    */
 }
+.image-error {
+    width: 70%;
+    padding: 40px 0px 40px 0px;    
+    /*height: */
+}
 .card-panel {
     margin: auto;
     /*padding: 100px;    */
