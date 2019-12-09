@@ -1,3 +1,5 @@
+# /usr/bin/python3.6
+
 from flask import render_template, session, redirect, url_for, request
 from settings import app, db
 from random import choice
@@ -9,15 +11,15 @@ from model import InfoCodes, MODAL_COLORS, Priorities
 controller = Controller()
 
 
-def int_to_hours_labels(indx: int) -> str:
-    return f'{"0"*(2 - len(str(indx)))}{indx}:00'
+#def int_to_hours_labels(indx: int):
+#    return f'{"0"*(2 - len(str(indx)))}{indx}:00'
 
 
-def define_schedule() -> list:
+def define_schedule():
     return controller.get_activities(session['username'])
 
 
-def get_random_color() -> str:
+def get_random_color():
     return choice(MODAL_COLORS)
 
 

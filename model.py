@@ -195,11 +195,11 @@ class User(db.Model):
     # db.relationship must      be in the parent table
     activity = db.relationship(
         'Activity', backref='User', cascade="all, delete-orphan")
-
+'''
     def __repr__(self):
         return (f'{self.username},{self.password},'
                 f'{self.email},{self.name},{self.lastname}')
-
+'''
 
 class Activity(db.Model):
     """docstring for Activity"""
@@ -217,10 +217,10 @@ class Activity(db.Model):
                            cascade="all, delete-orphan")
     schedule = db.relationship(
         'Schedule', backref='Activity', cascade="all, delete-orphan")
-
+'''
     def __repr__(self):
         return (f'{self.title}, {self.location}, {self.username}')
-
+'''
 
 class Note(db.Model):
     """docstring for Note"""
