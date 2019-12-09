@@ -1,7 +1,8 @@
 {% extends "base-materialize.html" %}
 {% block content %}
 {% include "nav.html" %}
-  <div class="row home-page">
+{% include "carousel.html"%}
+<!--   <div class="row home-page">
     <div class="col s12 z-depth-6 card-panel">
     <div class="col s4">
       <img class="responsive-img" src="{{ url_for('static', filename='img/beeplanner.png') }}">
@@ -20,35 +21,35 @@
 
   </div>
 
-  </div>
+  </div> -->
 
   <div class="row" align="center">    
-  <div class="col z-depth-2 card-panel small about-cards" align="center">
-    <div class="row s12" align="center">
-      <i class="large material-icons">school</i>
+    <div class="col z-depth-2 card-panel small about-cards" align="center">
+      <div class="row s12" align="center">
+        <i class="large material-icons">school</i>
+      </div>
+      <h3 class="">School</h3>
+      <p class="flow-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. .</p>
     </div>
-    <h3 class="">School</h3>
-    <p class="flow-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. .</p>
-  </div>
 
-  <div class="col z-depth-2 card-panel small about-cards" align="center">
-    <div class="row s12" align="center">
-      <i class="large material-icons">access_alarm</i>
+    <div class="col z-depth-2 card-panel small about-cards" align="center">
+      <div class="row s12" align="center">
+        <i class="large material-icons">access_alarm</i>
+      </div>
+      <h3 class="">Reminders</h3>
+      <p class="flow-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. .</p>
     </div>
-    <h3 class="">Reminders</h3>
-    <p class="flow-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. .</p>
-  </div>
 
-  <div class="col z-depth-2 card-panel small about-cards" align="center">
-    <div class="row s12" align="center">
-      <i class="large material-icons">schedule</i>
+    <div class="col z-depth-2 card-panel small about-cards" align="center">
+      <div class="row s12" align="center">
+        <i class="large material-icons">schedule</i>
+      </div>
+      <h3 class="">Schedule</h3>
+      <p class="flow-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. .</p>
     </div>
-    <h3 class="">Schedule</h3>
-    <p class="flow-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. .</p>
-  </div>
 
   </div>
 
