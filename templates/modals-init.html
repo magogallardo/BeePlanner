@@ -1,7 +1,16 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   <script>
-    $(document).ready(function(){
-      $('.modal').modal();
-    });
+  $(document).ready(function(){
+    $('.tooltipped').tooltip();
+ 
+    $('.modal').modal({
+   
+        dismissible: false, // Modal cannot be closed by clicking anywhere outside
+   
+      });
+  });
+    function openModalOwn(id_modal) {
+        $('#'+id_modal).modal('open');
+    }
   </script>
