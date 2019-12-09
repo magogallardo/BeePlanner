@@ -1,17 +1,17 @@
 from settings import db
 
 MODAL_COLORS = (
-    'red lighten-3',
-    'amber lighten-3',
-    'deep-orange accent-1',
-    'blue-grey lighten-1',
-    'amber accent-3',
-    'lime lighten-2',
-    'teal accent-3',
-    'indigo lighten-3',
-    'purple accent-1',
-    'red lighten-2',
-    'light-green lighten-2'
+    'amber darken-4', 
+    'orange accent-4', 
+    'yellow accent-2', 
+    'cyan', 
+    'teal darken-1', 
+    'red accent-2', 
+    'light-blue darken-4', 
+    'purple accent-2', 
+    'light-green accent-3', 
+    'deep-orange accent-1', 
+
 )
 
 
@@ -141,9 +141,14 @@ class Model:
                                     title=title, priority=priority,
                                     location=location, username=username,))
 
-    def read_activity(self, title):
-        response = self.__session.query(Activity).filter(
-            Activity.title == title).first()
+    def read_activity(self, title=None, activity_id=None):
+        if title:
+            response = self.__session.query(Activity).filter(
+                Activity.title == title).first()
+        else:
+            response = self.__session.query(Activity).filter(
+                Activity.activity_id == activity_id).first()
+
         if response:
             return response
         else:
@@ -157,21 +162,21 @@ class Model:
         self.__session.delete(activity)
 
     def create_note(self, content, priority, due_date,
-                    creationt_date, username,
+                    creation_date, username,
                     activity_id,):
         self.__session.add(Note(content=content, priority=priority,
                                 due_date=due_date,
-                                creationt_date=creationt_date,
+                                creation_date=creation_date,
                                 username=username,
                                 activity_id=activity_id,))
 
     def read_notes(self, username=None, activity_id=None):
         if username:
             return self.__session.query(Note).join(
-                User).filter(User.username == username)
+                User).filter(User.username == username).all()
         elif activity_id:
             return self.__session.query(Note).join(
-                Activity).filter(Activity.activity_id == activity_id)
+                Activity).filter(Activity.activity_id == activity_id).all()
 
     def read_note(self, username, activity_id, content):
         self.__session.query(Note).filter(
@@ -229,8 +234,8 @@ class Note(db.Model):
     note_id = db.Column(db.Integer, nullable=False, primary_key=True)
     content = db.Column(db.String(25), nullable=False)
     priority = db.Column(db.String(30), nullable=False, )
-    due_date = db.Column(db.DateTime, nullable=False)
-    creationt_date = db.Column(db.DateTime, nullable=False)
+    due_date = db.Column(db.DateTime, nullable=True)
+    creation_date = db.Column(db.DateTime, nullable=False)
     username = db.Column(db.Integer, db.ForeignKey(
         'User.username'), nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey(
