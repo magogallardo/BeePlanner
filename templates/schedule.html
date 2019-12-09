@@ -1,8 +1,8 @@
 <div class="row s12" align="center">
   <h2>Schedule</h2>
 </div>
-<div class="row calendar">
-<div class="card-panel z-depth-3">
+<div class="row">
+<div class="card-panel schedule z-depth-3">
     <div class="row s12">
         <div class="col s2"><h4 class=""></h3></div>
         <div class="col s2"><h4 class="">Mon</h3></div>
@@ -40,8 +40,9 @@
         <div class="col s2">
           <div class="calendar__day">
             {% with  color='lime lighten-1', modal_id='modal-1', trigger='trigger',
-                            modal_title='title', content='Hello world'%}
-                {% include 'pop-up.html'%}
+                            modal_title='Calculus', content='Hello world', activity=None%}
+
+                {% include 'activity-pop-up.html'%}
             {% endwith%}
 
           </div>
