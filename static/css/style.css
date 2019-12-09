@@ -95,4 +95,10 @@ border-style: none;
    background-color: #272525;
    opacity: 20%;
  
+} 
+/*[type="radio"]:not(:checked), [type="radio"]:checked {
+    position: relative;
+    left: 0px;
+    opacity: 1;
 }
+*/

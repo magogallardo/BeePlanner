@@ -1,7 +1,13 @@
 {# BEGIN REMINDER #}
 <li>
     <div class="collapsible-header {{ color_header }}" style="border-color: transparent;padding-top: 1px;">
-        <i class="material-icons left "> {{ icon_header }}</i> <h5>{{ title_header }}</h5>
+        <div class="col s2" style="padding-top:20px;">
+            <i class="material-icons large"> {{ icon_header }}</i> 
+        </div>
+        <div class="col s10">
+            
+            <h5>{{ title_header }}</h5>
+        </div>
     </div>
     <div class="collapsible-body reminder-body {{ color_body }}">
         <div class="divider"></div>
