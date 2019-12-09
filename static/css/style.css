@@ -64,3 +64,35 @@ nav {
     padding: 40px; 
     align-items: center;
 }
+.card.horizontal {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.reminder{
+    width: 100%;
+    border-style: none;
+}
+.collapsible-body{
+    padding: 15px;
+    border-style: none;
+}
+.collapsible{
+    border-style: none;
+}
+.modal-profile {
+border-style: none;
+  margin-left: 180px;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 200px;
+}
+.schedule{
+    border-radius: 20px;
+}
+.backdrop{
+   background-color: #272525;
+   opacity: 20%;
+ 
+}

@@ -1,12 +1,12 @@
-<a class="modal-trigger {{ color}}" href="#{{ modal_id }}"> {{ trigger }} </a>
+<a class="modal-trigger black-text {{ color }}" href="#{{ modal_id }}"> {{ trigger }} </a>
 <div id="{{ modal_id }}" class="modal">
   <div class="modal-content">
-  <h1>{{ modal_title }}</h1>
-  <p class="flow-text bols">
-    {{ content }}
-  </p>                
-  </div>
-  <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat"><h4>Close</h4></a>
+      <div class="row">
+        <div class="col s10"><h2>{{ modal_title }}</h2></div>
+        <div class="col s2"><i class="modal-close material-icons medium right">close</i></div>
+      </div>
+      {% block content %}
+          
+      {% endblock %}
   </div>
 </div>
