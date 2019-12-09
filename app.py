@@ -7,9 +7,9 @@ from datetime import datetime
 
 controller = Controller()
 
-
-def int_to_hours_labels(indx: int) -> str:
-    return f'{"0"*(2 - len(str(indx)))}{indx}:00'
+# pyuthon3.6
+# def int_to_hours_labels(indx: int) -> str:
+#     return f'{"0"*(2 - len(str(indx)))}{indx}:00'
 
 
 def define_notes():

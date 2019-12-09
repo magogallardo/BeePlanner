@@ -5,7 +5,8 @@ from os import getcwd
 
 db_name = 'Cinema.db'
 app = Flask(__name__)
-uri = f'sqlite:///{abspath(getcwd())}/{db_name}'
+uri = 'sqlite:///{}/{}'.format(abspath(getcwd()), db_name)
+# uri = f'sqlite:///{abspath(getcwd())}/{db_name}'
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "gydasjhfuisuqtyy234897dshfbhsdfg83wt7"
