@@ -6,23 +6,50 @@
         <div class="row s12" align="center">
           <h2>Reminders</h2>
         </div>
-        <div class="card-panel">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </div>
+        <div class="row s12">
+
+
+  
+
+            {% if notes != None %}
+            <ul class="collapsible popout reminder transparent">
+                {% for note, color, activity in notes %}
+                    {% set icon='child_care' %}
+                    {% if note.priority == 'high' %}
+                        {% set icon = 'report_problem' %}
+                    {% elif note.priority == 'medium' %}
+                        {% set icon = 'face' %}
+                    {% endif%} 
+
+                    {% with  icon_header=icon, title_header=note.content[:10]+ ' ...', color_header=color, color_body=color, note=note %}
+                        {% include 'reminder.html'%}
+                    {% endwith%}
+                {% endfor%}
+            </ul>
+            {% else %}
+            <div class="row" align="center">
+                
+            <i class="material-icons large">layers_clear</i>
+            </div>
+
+            {% endif %}
+
+</div>
     </div>
 
     <div class="col s8">
         {% include "schedule.html" %}
     </div>
 </div>
-
+<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">add</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating blue tooltipped" data-position="top" data-tooltip="Reminder" ><i class="material-icons">add_alarm</i></a></li>
+      <li><a class="btn-floating amber darken-3 tooltipped" data-position="top" data-tooltip="Activity"><i class="material-icons">school</i></a></li>
+    </ul>
+  </div>
 {# {% include "schedule.html" %} #}
 
 {% include "modals-init.html" %}
