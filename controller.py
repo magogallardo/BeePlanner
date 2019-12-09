@@ -27,6 +27,8 @@ class Controller:
         self.model.create_user(username, email, password,
                                name, lastname, phone)
         return InfoCodes.SUCCESS
+    def get_user(self, username):
+        return self.model.read_user(username=username)
 
     def get_username(self, email):
         return self.model.read_user(email=email).username
@@ -34,13 +36,28 @@ class Controller:
     def get_all_users(self):
         return self.model.read_users()
 
+    def get_activity_name(self, activity_id):
+        response =  self.model.read_activity(activity_id=activity_id)
+        if response:
+            return response.title
+        else:
+            return InfoCodes.ERROR
+
+
+    def get_activity_id(self, title):
+        response = self.model.read_activity(title=title)
+        if response:
+            return response.activity_id
+        else:
+            return InfoCodes.ERROR
+
     def add_activity(self, username, description, priority, location, title):
-        activity = self.model.read_activity(title)
+        activity = self.model.read_activity(title=title)
         if activity:
             return InfoCodes.ACTIVITY_ALREADY_EXIST
         self.model.create_acitivity(title, description,
                                     priority, location, username)
-        return self.model.read_activity(title).activity_id
+        return self.get_activity_id(title)
 
     def add_schedule(self, monday, tuesday, wednesday, thursday,
                      friday, activity_id):
@@ -62,23 +79,24 @@ class Controller:
         return InfoCodes.SUCCESS
 
     def remove_activity(self, title):
-        response = self.model.read_activity(title)
+        response = self.model.read_activity(title=title)
         if response == InfoCodes.ERROR:
             return response
         self.model.delete_activity(response)
         return InfoCodes.SUCCESS
 
     def add_note(self, content, priority, due_date,
-                 creationt_date, username,
+                 creation_date, username,
                  activity_id,):
         self.model.create_note(content, priority, due_date,
-                               creationt_date, username, activity_id)
+                               creation_date, username, activity_id)
+        return InfoCodes.SUCCESS
 
     def get_notes(self, username=None, title=None):
         if username:
             return self.model.read_notes(username=username)
         elif title:
-            activity_id = self.model.read_activity(title).activity_id
+            activity_id = self.model.read_activity(title=title).activity_id
             return self.model.read_notes(activity_id=activity_id)
 
     def remove_notes(self, username, title, content):
